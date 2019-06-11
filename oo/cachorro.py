@@ -1,21 +1,53 @@
+class Coleira:
+    def indentificar(self):
+        raise NotImplementedError()
+
+
+class ColeiraEletronica(Coleira):
+    def indentificar(self):
+        print('Mandando sinal de GPS')
+
+
+class ColeiraPadrao(Coleira):
+    def indentificar(self):
+        print('Rua XPTO')
+
+
 class Cachoro:
     olhos = 2
 
     def __init__(self, nome: str = '', pai: 'Cachoro' = None):
+        self.coleiras = []
         self.pai = pai
         self.nome = nome
 
+    def colocar_coleira(self, coleira: Coleira):
+        self.coleiras.append(coleira)
+
     def latir(self):
-        return f'{self.nome}: Au'
+        raise NotImplementedError()
+
+    def retonar_ao_dono(self):
+        print(f'Cachorro perdido: {self.nome}')
+        for coleira in self.coleiras:
+            coleira.indentificar()
 
 
 class ViraLata(Cachoro):
-
     def latir(self):
         return f'{self.nome}: Ain Ain'
 
 
-rex = Cachoro('Rex')
+class CaoDeRacao(Cachoro):
+    def latir(self):
+        return f'{self.nome}: Au Au'
+
+
+coleira = ColeiraPadrao()
+rex = CaoDeRacao('Rex')
+rex.colocar_coleira(coleira)
+rex.colocar_coleira(ColeiraEletronica())
+
 tintin = ViraLata(pai=rex)
 # print(type(rex), type(tintin))
 # print(isinstance('', Cachoro))
@@ -44,3 +76,4 @@ for c in cachoros:
     print(c.latir())
 
 print(tintin.pai.nome)
+rex.retonar_ao_dono()

@@ -1,4 +1,4 @@
-from oo.calculadora_oo import Calculadora, Operacao
+from oo.calculadora_oo import CalculadoraInfixa, Operacao, CalculadoraPrefixa
 
 
 class Multiplicacao(Operacao):
@@ -9,6 +9,6 @@ class Multiplicacao(Operacao):
 
 
 mult = Multiplicacao()
-calculadora = Calculadora()
+calculadora = CalculadoraPrefixa()
 calculadora.adicionar(mult)
 print(calculadora.efetuar_operacao())
